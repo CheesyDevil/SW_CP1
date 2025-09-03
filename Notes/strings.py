@@ -24,4 +24,4 @@
 #What is index?
   # the location of a prticular character in a string 
 #How do we count indexes?
-  #
+  # starting at 0 and counting the characters
