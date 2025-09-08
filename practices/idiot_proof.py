@@ -2,7 +2,7 @@
 
 name=input("What is your name? ").strip().lower().title()
 
-print(name)
+
 phone=input("What is your phone number? ").strip().replace("-" , "").replace(" " , "")
 phone_list=list(phone)
 phone_list.insert(3, " ")
@@ -16,4 +16,4 @@ gpa=float(gpa)
 gpa_s=str(gpa_r)
 print(gpa_s)
 
-print("So your real name is " , name " your real phone number is " , phone , " and your GPA is about" , gpa_s ,".")
+print("So your real name is " + name + " your real phone number is " , phone , " and your GPA is about" , gpa_s ,".")
