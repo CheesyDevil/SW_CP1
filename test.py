@@ -6,3 +6,4 @@ char_list.insert(3, char_to_insert) # Insert at index 3
 new_string = "".join(char_list)
 print(new_string)
 #practice sync
+#test 2
