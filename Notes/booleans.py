@@ -1,3 +1,5 @@
+#SW 2nd Boolean notes
+
 #What can a Boolean hold? (i.e. what is a Boolean?)
   #True or Flase
 #What are Booleans normally used for?
@@ -17,7 +19,7 @@
 
 
 import datetime as date
-
+ #MOnth=%m or %b or %B Day= %d Year=%Y or %y Hour=%H Minute=%M seconds=%S
 name="seth"
 
 print(name.isalpha())
