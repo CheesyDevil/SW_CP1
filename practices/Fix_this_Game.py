@@ -17,14 +17,13 @@ def start_game():
         if attempts >= max_attempts:
             print(f"Sorry, you've used all {max_attempts} attempts. The number was {number_to_guess}.")
             game_over = True
-        else: # Logic 
-            if guess == number_to_guess:
+        elif guess == number_to_guess:  # Logic makes sure that game ends on 10 guesses
             print("Congratulations! You've guessed the number!")
             game_over = True
-            if guess > number_to_guess:
-            print("Too high! Try again.")
-            elif guess < number_to_guess:
-            print("Too low! Try again.")  
+        if guess > number_to_guess:
+             print("Too high! Try again.")
+        elif guess < number_to_guess:
+             print("Too low! Try again.")  
         continue #logic, is redundant
     print("Game Over. Thanks for playing!")
 start_game()
