@@ -1,1 +1,1 @@
-            print(f"{attempts}")
+print(f"your final list is {list}.")
