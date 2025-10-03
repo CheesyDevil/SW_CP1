@@ -1,11 +1,16 @@
 #SW 2nd Multiplication table
 
-size=int(input("How big would you like your multiplication tables?  "))
-size2=int(size)
+collums=int(input("How many collums would you like to be in your multiplication table?  "))
+rows=int(input("How many rows would you like to be in your multiplication table?  "))
 num_list=[]
+count=1
 
-while size2>=1:
-    while size>=1:
-        num_list.append(size)
-        size=size-1
+while rows>=1:
+    while rows>=1:
+        num_list.append(rows)
+        collums=collums-1
     num_list.reverse()
+    print(num_list)
+    collums=len(num_list)
+    num_list.clear()
+    count=count+1
