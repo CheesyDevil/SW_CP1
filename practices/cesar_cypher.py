@@ -5,8 +5,9 @@
 def encode(): #create encoding function
     mess=input("What is the message you would like to have cyphered\n ") #create input for what is being cyphered 
     cyph_chan=input("How many timeswyould you like to chyper this message?\n")#create input for cypher number
-    for char in mess:
-        if cyph_chan>0:
+
+    if cyph_chan>0:
+        for char in mess:
             if char.isupper():
                 if ord(char)<90:
                     e=ord(char) 
@@ -25,7 +26,9 @@ def encode(): #create encoding function
                     char=chr(e)
             else:
                 ord(char)=ord(char)
-        elif cyph_chan<0:
+            cyph_chan-=cyph_chan
+    elif cyph_chan<0:
+        for char in mess:
             if char.isupper():
                 if ord(char)>65:
                     e=ord(char) 
@@ -44,8 +47,9 @@ def encode(): #create encoding function
                     char=chr(e)
             else:
                 ord(char)=ord(char)
-        else:
-            char=char
+            cyph_chan+=cyph_chan
+    else:
+        mess+mess
 
 def decode(): #create encoding function
     mess=input("What is the message you would like to have decoded\n ") #create input for what is being cyphered 
