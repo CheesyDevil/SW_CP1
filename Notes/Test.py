@@ -22,3 +22,7 @@ def e:
             ord(char)==ord(char)
         print(char)
     print(mess_out)
+
+
+#git config --global user.name "github username"
+#git config --global user.email "github email"
