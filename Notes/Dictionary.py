@@ -18,7 +18,7 @@ print(names["Lucy"])
 #How do you get each of the keys from a dictionary?
 print(names.keys)
 #How do you update a value in a dictionary?
-names["age"]+=1
+names["Lucy"]+=1
 #Can you add new key and value pairs to a dictionary during runtime?
 names['Seth']=15 #yes
 

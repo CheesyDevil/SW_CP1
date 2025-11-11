@@ -21,3 +21,14 @@ side={ #dictionary of all sides and their prices
     "unseasoned avocado": 8.99,
     "white Truffles": 990.99
 }
+
+total=0
+
+
+
+for key in entre.keys():#printing entre costs
+    print(f"the {key} costs ${entre[key]}")
+ent=input(f"Type '1' for T-bone, '2' for iceblock, '3' for paper salad and '4' for uranium-235\nwhat would you like your entre to be?\n ")#input for choosing entre
+
+if ent=='1':
+    total+=entre["T-bone"]
