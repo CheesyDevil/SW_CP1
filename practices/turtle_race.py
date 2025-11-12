@@ -3,6 +3,9 @@
 import turtle
 import random
 
+screen=turtle.Screen()
+screen.setworldcoordinates(-10,-10,50,50)
+
 t1=turtle.Turtle()
 t2=turtle.Turtle()
 t3=turtle.Turtle()
