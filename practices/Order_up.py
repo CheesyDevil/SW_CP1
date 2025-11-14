@@ -33,7 +33,7 @@ side={ #dictionary of all sides and their prices
     "dried paris green":7.99,
     "fries":6.99,
     "unseasoned avocado": 8.99,
-    "white truffles": 990.99
+    "white truffles": 1999.99
 }
 
 side_key={ #dictionary of all sides and their numbers
@@ -45,8 +45,7 @@ side_key={ #dictionary of all sides and their numbers
 
 total=0
 
-order=[]#list for the items that are ordered
-
+order="" #string for the items that are ordered
 
 for key in entre.keys():#printing entre costs
     print(f"the {key} costs ${entre[key]}")
@@ -57,18 +56,10 @@ while len(order)==0: #loop for entre ordering
         print(f"the {key} costs ${entre[key]}")
     ent=input(f"Type '1' for T-bone,\n'2' for iceblock,\n'3' for paper salad and\n'4' for uranium-235\nwhat would you like your entre to be?\n ")#input for choosing entre
 
-    if ent=='1':
-        total+=entre[entre_key[1]]
-        order.append(entre_key[1])
-    elif ent=='2':
-        total+=entre[entre_key[2]]
-        order.append(entre_key[2])
-    elif ent=='3':
-        total+=entre[entre_key[3]]
-        order.append(entre_key[3])
-    elif ent=='4':
-        total+=entre[entre_key[4]]
-        order.append(entre_key[4])
+    if ent=='1'or ent=='2'or ent=='3'or ent=='4': #checking if input is valid
+        ent_nam=drink_key[int(ent)]
+        total+=drink[ent_nam]
+        order=order+(f"For your entre you ordered the {ent_nam}\n")
     else:
         print("please enter a valid order")
 
@@ -77,18 +68,10 @@ while len(order)==1: #loop for drink ordering
         print(f"the {key} costs ${drink[key]}")
     drk=input(f"Type '1' for soda,\n'2' for murcury,\n'3' for olive oil\nand '4' for gasoline\nwhat would you like your drink to be?\n ")#input for choosing drink
 
-    if drk=='1':
-        total+=drink[drink_key[1]]
-        order.append(drink_key[1])
-    elif drk=='2':
-        total+=drink[drink_key[2]]
-        order.append(drink_key[2])
-    elif drk=='3':
-        total+=drink[drink_key[3]]
-        order.append(drink_key[3])
-    elif drk=='4':
-        total+=drink[drink_key[4]]
-        order.append(drink_key[4])
+    if drk=='1'or drk=='2'or drk=='3'or drk=='4': #checking if input is valid
+        drk_nam=drink_key[int(drk)]
+        total+=drink[drk_nam]
+        order=order+(f"For your drink you ordered a glass of {drk_nam}\n")
     else:
         print("please enter a valid order")
 
@@ -97,9 +80,16 @@ while len(order)==2 or len(order)==3: #loop for side ordering, makes it run twic
         print(f"the {key} costs ${side[key]}")
     sid=input(f"Type '1' for dried paris green,\n'2' for fries,\n'3' for unseasoned avocado\nand '4' for white truffles\nwhat would you like your side to be?\n ")#input for choosing sides
 
-    if sid=='1'or sid=='2'or sid=='3'or sid=='4':
-        sd=drink_key[int(sid)]
+    if sid=='1'or sid=='2'or sid=='3'or sid=='4': #checking if input is valid
+        sid_nam=side_key[int(sid)]
+        total+=side[sid_nam]
+        order=order+(f"You ordered a small plate of {sid_nam} \n")
     else:
         print("please enter a valid order")
 
-print(f"Your final order is {}")
+order=order+(f"The final cost comes out to ${total}")
+
+print(order)
+
+
+#CHANGE TO INCORPERATE FUNCTIONS
