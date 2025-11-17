@@ -46,19 +46,25 @@ side_key={ #dictionary of all sides and their numbers
 total=0
 
 order="" #string for the items that are ordered
+def main(menu, menu_key):
+    if len(order)==0:
+        menu=entre
+        menu_key=entre_key
+    elif len(order)==1:
+        menu=drink
+        menu_key=drink_key
+    elif len(order)==2 or len(order)==3:
+        menu=side
+        menu_key=side_key
 
-for key in entre.keys():#printing entre costs
-    print(f"the {key} costs ${entre[key]}")
-ent=input(f"Type '1' for T-bone, '2' for iceblock, '3' for paper salad and '4' for uranium-235\nwhat would you like your entre to be?\n ")#input for choosing entre
+    for key in menu.keys():#printing entre costs
+        print(f"the {key} costs ${menu[key]}")
+    ent=input(f"Type '1' for {menu_key[1]}, '2' for {menu_key[2]}, '3' for {menu_key[3]} and '4' for {menu_key[4]}\nwhat is your choice?\n ")#input for choosing dish
 
-while len(order)==0: #loop for entre ordering
-    for key in entre.keys():#printing entre costs
-        print(f"the {key} costs ${entre[key]}")
-    ent=input(f"Type '1' for T-bone,\n'2' for iceblock,\n'3' for paper salad and\n'4' for uranium-235\nwhat would you like your entre to be?\n ")#input for choosing entre
 
     if ent=='1'or ent=='2'or ent=='3'or ent=='4': #checking if input is valid
-        ent_nam=drink_key[int(ent)]
-        total+=drink[ent_nam]
+        ent_nam=menu_key[int(ent)]
+        total+=menu[ent_nam]
         order=order+(f"For your entre you ordered the {ent_nam}\n")
     else:
         print("please enter a valid order")
