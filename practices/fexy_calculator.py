@@ -51,7 +51,7 @@ def main():#Main loop
 
 
 
-print("Welcome to flexible calculator")
+print("Welcome to Flexy calculator")
 main()
 awn=True
 while awn:
@@ -62,5 +62,6 @@ while awn:
         awn=False#ends loop and calculator sesion
     else:
         print("Please enter a valid input")
+print("Thank you for using Flexy calculator")
 
 
