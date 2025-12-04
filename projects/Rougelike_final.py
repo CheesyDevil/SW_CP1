@@ -43,7 +43,7 @@ card_example:{1('index number'),["melee toy effectiveness"("card name"), "1"("af
 
 #make card add funtion (add bonus number to bonus type in affected toy list in the modifiers list)
 
-#make a function for player victory (check if cat rooms=5 and if it does reset the map and increase floors vairable, else add 1 to rooms) (you recieve 1-3 bandages(can increases with luck and cat level), your score increases by 100**cat level, and you get to choose between 3 cards which are selected by an RNG which picks a number 1-40 with higher numbers coresponding to higher rarity cards(the RNG number can be influenced by luck and cat level))(add card using card add function)
+#make a function for player victory (check if cat rooms=5 and if it does reset the map and increase floors vairable, else add 1 to rooms)(You recieve 0-2 boxes (can increse with luck and cat level)) (you recieve 1-3 bandages(can increases with luck and cat level), your score increases by 100**cat level, and you get to choose between 3 cards which are selected by an RNG which picks a number 1-40 with higher numbers coresponding to higher rarity cards(the RNG number can be influenced by luck and cat level))(add card using card add function)
 #make a function for player loss (a game over screen with your final score being displayed and the option to continue)(if player says yes restart entire game loop)(if player says no end game)
 
 #make a funtion for the map (check if Rooms=5 and if it does send player to the boss)(Display the map(Show which room player is in)(show the next room options (each one has (1 + Floors)/5 chance of being an Elite fight))(give player option to go left, right, or middle)(set cat level to 1 if room is basic, 2 if room is elite or 3 if room is Boss)
