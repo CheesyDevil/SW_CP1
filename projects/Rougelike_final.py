@@ -17,7 +17,6 @@ card_example:{1('index number'),["melee toy effectiveness"("card name"), "1"("af
 
 #create a friendliness variable(cat HP)
 #create an agita variable(how likely the cat is to scratch you)
-#create cat rank variable (which can be 1 1.5 or 2 wether it's a basic, elite or boss level) (increases agita gain, loot collected, and score)
 #Create cat level variable (changes based on which kind of cat you are fighting (1,2,3))(increases your loot luck)
   
 #create score variable (increses after defeating cats)
@@ -43,7 +42,7 @@ card_example:{1('index number'),["melee toy effectiveness"("card name"), "1"("af
 
 #make card add funtion (add bonus number to bonus type in affected toy list in the modifiers list)
 
-#make a function for player victory (check if cat rooms=5 and if it does reset the map and increase floors vairable, else add 1 to rooms)(You recieve 0-2 boxes (can increse with luck and cat level)) (you recieve 1-3 bandages(can increases with luck and cat level), your score increases by 100**cat level, and you get to choose between 3 cards which are selected by an RNG which picks a number 1-40 with higher numbers coresponding to higher rarity cards(the RNG number can be influenced by luck and cat level))(add card using card add function)
+#make a function for player victory (check if cat rooms=5 and if it does reset the map and increase floors vairable, else add 1 to rooms)(You recieve 0-2 boxes (can increse with luck and cat level))(you recieve 1-3 bandages(can increases with luck and cat level), your score increases by 100**cat level, and you get to choose between 3 cards which are selected by an RNG which picks a number 1-40 with higher numbers coresponding to higher rarity cards(the RNG number can be influenced by luck and cat level))(add card using card add function)
 #make a function for player loss (a game over screen with your final score being displayed and the option to continue)(if player says yes restart entire game loop)(if player says no end game)
 
 #make a funtion for the map (check if Rooms=5 and if it does send player to the boss)(Display the map(Show which room player is in)(show the next room options (each one has (1 + Floors)/5 chance of being an Elite fight))(give player option to go left, right, or middle)(set cat level to 1 if room is basic, 2 if room is elite or 3 if room is Boss)
@@ -66,3 +65,158 @@ card_example:{1('index number'),["melee toy effectiveness"("card name"), "1"("af
             #else continue room loop
         #player victory function 
         #map function
+
+
+
+
+
+import random
+
+#Dictionaries
+basic_cats={
+0:[],
+1:[],
+2:[],
+3:[],
+4:[],
+5:[],
+6:[],
+7:[],
+8:[],
+9:[],
+}
+elite_cats={
+0:[],
+1:[],
+2:[],
+3:[],
+4:[],
+5:[],
+6:[],
+7:[],
+8:[],
+9:[],
+}
+boss_cats={
+0:[],
+1:[],
+2:[],
+3:[],
+4:[],
+5:[],
+6:[],
+7:[],
+8:[],
+9:[],
+}
+
+common_cards={
+0:[],
+1:[],
+2:[],
+3:[],
+4:[],
+5:[],
+6:[],
+7:[],
+8:[],
+9:[],
+}
+uncommon_cards={
+0:[],
+1:[],
+2:[],
+3:[],
+4:[],
+5:[],
+6:[],
+7:[],
+8:[],
+9:[],
+}
+rare_cards={
+0:[],
+1:[],
+2:[],
+3:[],
+4:[],
+5:[],
+6:[],
+7:[],
+8:[],
+9:[],
+}
+epic_cards={
+0:[],
+1:[],
+2:[],
+3:[],
+4:[],
+5:[],
+6:[],
+7:[],
+8:[],
+9:[],
+}
+legendary_cards={
+0:[],
+1:[],
+2:[],
+3:[],
+4:[],
+5:[],
+6:[],
+7:[],
+8:[],
+9:[],
+}
+
+#Lists
+actions=["Melee Toy", "Throwing Toy", "Cat Food", 'Box', "Bandage", "Check", "Inentory", "Pet"]
+mods=[[0,1],[0,1],[0,1],[0,1],[0,1],[0]]
+
+#Integers
+hp=100
+bandages=10
+boxes=0
+friendliness=0
+agita=0
+cat_level=0
+score=0
+rooms=0
+floors=0
+
+#functions
+def dismap():
+    print
+
+def begin():
+    print
+def player():
+    print
+def cat():
+    print
+
+def melee():
+    print
+def throw():
+    print
+def food():
+    print
+def box():
+    print
+def bandage():
+    print
+def check():
+    print
+def inventory():
+    print
+def pet():
+    print
+
+def cadd():
+    print
+def victory():
+    print
+def defeat():
+    print
