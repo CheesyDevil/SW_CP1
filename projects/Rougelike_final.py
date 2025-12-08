@@ -174,6 +174,7 @@ legendary_cards={
 #Lists
 actions=["Melee Toy", "Throwing Toy", "Cat Food", 'Box', "Bandage", "Check", "Inentory", "Pet"]
 mods=[[0,1],[0,1],[0,1],[0,1],[0,1],[0]]
+cat=[]
 
 #Integers
 hp=100
@@ -191,10 +192,50 @@ def dismap():
     print
 
 def begin():
-    print
+    if cat_level==1:
+        cat=basic_cats[random.randint(0,9)]
+    elif cat_level==2:
+        cat=elite_cats[random.randint(0,9)]
+    elif cat_level==3:
+        cat=boss_cats[random.randint(0,9)]
+    else:
+        print('error')
+    print(f"a {cat[0]} is approaching you")
+    friendliness=cat[4]
+    agita=cat[5]
+
 def player():
-    print
-def cat():
+    while True:
+        print(f"You have {hp} Health left")
+        print(f"to do an action type it's coresponding number\n1:{actions[0]}\n2:{actions[1]}\n3:{actions[2]}\n4:{actions[3]}\n5:{actions[4]}\n6:{actions[5]}\n7:{actions[6]}\n8:{actions[7]}")
+        choice=input("what would you like to do?")
+        if choice=="1":
+            melee()
+            break
+        elif choice=="2":
+            throw()
+            break
+        elif choice=="3":
+            food()
+            break
+        elif choice=="4":
+            box()
+            break
+        elif choice=="5":
+            bandage()
+            break
+        elif choice=="6":
+            check()
+            break
+        elif choice=="7":
+            inventory()
+            continue
+        elif choice=="8":
+            pet()
+            break
+        else:
+            print("please enter a valid input")
+def cat_turn():
     print
 
 def melee():
@@ -210,7 +251,7 @@ def bandage():
 def check():
     print
 def inventory():
-    print
+    print(f"Melee flat{mods[0[0]]},\nMelee mult{mods[0[1]]},\nthrowing flat{mods[1[0]]},\nthrowing mult{mods[1[1]]},\nfood flat{mods[2[0]]},\nfood mult{mods[2[1]]},\nbox flat{mods[3[0]]},\nbox mult{mods[3[1]]},\nhealing flat{mods[4[0]]},\nhealing mult{mods[4[1]]},\nLuck{mods[5[0]]}")
 def pet():
     print
 
@@ -220,3 +261,15 @@ def victory():
     print
 def defeat():
     print
+
+while True:
+    print("Welcome to cat cat tower ")
+    #create floor loop
+        #create room loop
+            #player turn function
+            #cat turn function 
+            #if player hp<=0 
+                #player lose function
+            #else continue room loop
+        #player victory function 
+        #map function
