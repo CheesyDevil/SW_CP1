@@ -179,13 +179,13 @@ cat=[]
 #Integers
 hp=100
 bandages=10
-boxes=0
-friendliness=0
-agita=0
-cat_level=0
-score=0
-rooms=0
-floors=0
+boxes=1
+friendliness=1
+agita=1
+cat_level=1
+score=1
+rooms=1
+floors=1
 
 #functions
 def dismap():
@@ -239,24 +239,51 @@ def cat_turn():
     print
 
 def melee():
-    print
+    friendliness-=(random.randint(3,9)+mods[0[0]])*mods[0[1]]
+    print("cat is playing with toy and seems more friendly")
 def throw():
-    print
+    friendliness-=(random.randint(7,9)+mods[1[0]])*mods[1[1]]
+    agita+=10*cat_level
+    print("cat went chased toy and seems more agitated and friendly")
 def food():
-    print
+    friendliness-=(random.randint(3,5)+mods[2[0]])*mods[2[1]]
+    agita-=5*mods[2[1]]
+    print("cat ate the food and seems less agitated and more friendly")
 def box():
-    print
+    boxes-=1
+    if ((100-(agita*(cat_level/2))+mods[3[0]])*mods[3[1]])>=random.randint(1,100):
+        agita+=20
+        print("cat went in box and seems less agitated")
+    else:
+        print("The cat wasn't lured by the box")
 def bandage():
-    print
+    bandages-=1
+    hp+=(random.randint(3,7)+mods[4[0]]*mods[4[1]])
 def check():
-    print
+    print(f"cat has an Agita of {agita}\n cat needs {friendliness} more freindliness points to be pet")
 def inventory():
     print(f"Melee flat{mods[0[0]]},\nMelee mult{mods[0[1]]},\nthrowing flat{mods[1[0]]},\nthrowing mult{mods[1[1]]},\nfood flat{mods[2[0]]},\nfood mult{mods[2[1]]},\nbox flat{mods[3[0]]},\nbox mult{mods[3[1]]},\nhealing flat{mods[4[0]]},\nhealing mult{mods[4[1]]},\nLuck{mods[5[0]]}")
 def pet():
-    print
-
+    if friendliness<=0:
+        print('cat let you pet it and gave you some loot')
+        victory()
+    else:
+        print("cat recoiled at your approach")
 def cadd():
-    print
+    for x in range(0,3):
+        rng=random.randint(1,50)+mods[5[0]]
+        if rng>=50:
+            legendary_cards
+        elif rng>=45:
+            epic_cards
+        elif rng>=35:
+            rare_cards
+        elif rng>=20:
+            uncommon_cards
+        elif rng<20:
+            common_cards
+        else:
+            print("Error")
 def victory():
     print
 def defeat():
