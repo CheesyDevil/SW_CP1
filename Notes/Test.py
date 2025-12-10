@@ -14,4 +14,4 @@ print_list_contents(*my_list)
 #git config --global user.name "github username"
 #git config --global user.email "github email"
 print('██')
-print("\033[89m██\033[0m")
+print(f"\033[96m{my_list[1]}\033[0m")

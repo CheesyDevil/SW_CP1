@@ -271,19 +271,36 @@ def pet():
         print("cat recoiled at your approach")
 def cadd():
     for x in range(0,3):
+        card=[]
         rng=random.randint(1,50)+mods[5[0]]
         if rng>=50:
-            legendary_cards
+            card.append(legendary_cards[random.randint(0,9)])
+            print(f"\033[93m{card[0]}\033[0m")
         elif rng>=45:
-            epic_cards
+            card.append(epic_cards[random.randint(0,9)])
+            print(f"\033[94m{card[0]}\033[0m")
         elif rng>=35:
-            rare_cards
+            card.append(rare_cards[random.randint(0,9)])
+            print(f"\033[96m{card[0]}\033[0m")
         elif rng>=20:
-            uncommon_cards
+            card.append(uncommon_cards[random.randint(0,9)])
+            print(f"\033[92m{card[0]}\033[0m")
         elif rng<20:
-            common_cards
+            card.append(common_cards[random.randint(0,9)])
+            print(card[0])
         else:
             print("Error")
+    while True:
+        choice=input("which card would you like?")
+        if choice=="1" or choice == "2" or choice =="3":
+            choice=int(choice)
+            card_1=card[1+(choice*4-4)]
+            card_2=card[2+(choice*4-4)]
+            mods[card_1[card_2]]+=card[3+(choice*4-4)]
+            break
+        else:
+            print("Invalid input")
+    
 def victory():
     print
 def defeat():
