@@ -185,11 +185,31 @@ agita=1
 cat_level=1
 score=1
 rooms=1
-floors=1
+floors=0
 
 #functions
 def dismap():
-    print
+    types=[]
+    levels=[]
+    if rooms==4:
+        print("You are entering the boss room")
+        cat_level=3
+    else:
+        for x in range(0,3):
+            if random.randint(1,15)>=15-floors:
+                types.append("elite")
+                levels.append(2)
+            else:
+                types.append("basic")
+                levels.append(1)
+        while True:
+            direct=input(f"would you like to go to the\n Left:{types[0]} (1)\n Middle:{types[1]} (2)\n Right:{types[2]}(3)\n")
+            if direct=="1" or direct == "2" or direct =="3":
+                direct=int(direct)
+                cat_level=levels[direct-1]
+                break
+            else:
+                print("Please enter a valid input")
 
 def begin():
     if cat_level==1:
@@ -236,7 +256,12 @@ def player():
         else:
             print("please enter a valid input")
 def cat_turn():
-    print
+    if agita>=random.randint(0,100):
+        cattack=random.randint(1*cat_level+2*(floors-1),3*cat_level+2*(floors-1))
+        print(f"the cat scratched you for {cattack} damage")
+        hp-=cattack
+    else:
+        print("cat doesn't seem to want to scratch you.")
 
 def melee():
     friendliness-=(random.randint(3,9)+mods[0[0]])*mods[0[1]]
@@ -302,9 +327,18 @@ def cadd():
             print("Invalid input")
     
 def victory():
-    print
+    rooms+=1
+    box_gain=random.randint(0,mods[5[0]])
+    bandage_gain=random.randint(1+mods[5[0]],2*mods[5[0]]+2)
+    print(f"you gained {box_gain} boxes and {bandage_gain} bandages")
+    score+=(10**cat_level)*floors
+    cadd()
+    if rooms!=5:
+        dismap()
+    else:
+        print
 def defeat():
-    print
+    print("GAME OVER")
 
 while True:
     print("Welcome to cat cat tower ")
