@@ -188,7 +188,7 @@ rooms=1
 floors=0
 
 #functions
-def dismap():
+def dismap(rooms,cat_level,floors):
     types=[]
     levels=[]
     if rooms==4:
@@ -207,11 +207,11 @@ def dismap():
             if direct=="1" or direct == "2" or direct =="3":
                 direct=int(direct)
                 cat_level=levels[direct-1]
-                break
+                return cat_level
             else:
                 print("Please enter a valid input")
 
-def begin():
+def begin(cat_level,basic_cats,elite_cats,boss_cats,friendliness, agita):
     if cat_level==1:
         cat=basic_cats[random.randint(0,9)]
     elif cat_level==2:
@@ -223,78 +223,87 @@ def begin():
     print(f"a {cat[0]} is approaching you")
     friendliness=cat[4]
     agita=cat[5]
+    return friendliness and agita
 
-def player():
+def player(hp,actions,mods,cat,cat_level,friendliness,agita,bandages,boxes):
     while True:
         print(f"You have {hp} Health left")
         print(f"to do an action type it's coresponding number\n1:{actions[0]}\n2:{actions[1]}\n3:{actions[2]}\n4:{actions[3]}\n5:{actions[4]}\n6:{actions[5]}\n7:{actions[6]}\n8:{actions[7]}")
         choice=input("what would you like to do?")
         if choice=="1":
-            melee()
-            break
+            melee(friendliness,mods)
+            return friendliness
         elif choice=="2":
-            throw()
-            break
+            throw(friendliness,mods,cat_level)
+            return friendliness and agita
         elif choice=="3":
-            food()
-            break
+            food(friendliness,mods)
+            return friendliness and agita
         elif choice=="4":
-            box()
-            break
+            box(boxes,agita,mods)
+            return boxes and agita
         elif choice=="5":
-            bandage()
-            break
+            bandage(bandages,hp,mods)
+            return bandages and hp
         elif choice=="6":
-            check()
+            check(cat,friendliness,agita)
             break
         elif choice=="7":
-            inventory()
+            inventory(mods,boxes,bandages)
             continue
         elif choice=="8":
-            pet()
-            break
+            if pet(friendliness):
+                return False
+            else:
+                break
         else:
             print("please enter a valid input")
-def cat_turn():
+def cat_turn(agita,cat_level,hp):
     if agita>=random.randint(0,100):
         cattack=random.randint(1*cat_level+2*(floors-1),3*cat_level+2*(floors-1))
         print(f"the cat scratched you for {cattack} damage")
         hp-=cattack
+        return hp
     else:
         print("cat doesn't seem to want to scratch you.")
 
-def melee():
+def melee(friendliness,mods):
     friendliness-=(random.randint(3,9)+mods[0[0]])*mods[0[1]]
     print("cat is playing with toy and seems more friendly")
-def throw():
+    return friendliness
+def throw(friendliness,mods,cat_level):
     friendliness-=(random.randint(7,9)+mods[1[0]])*mods[1[1]]
     agita+=10*cat_level
     print("cat went chased toy and seems more agitated and friendly")
-def food():
+    return friendliness and agita
+def food(friendliness,mods):
     friendliness-=(random.randint(3,5)+mods[2[0]])*mods[2[1]]
     agita-=5*mods[2[1]]
     print("cat ate the food and seems less agitated and more friendly")
-def box():
+    return friendliness and agita
+def box(boxes,agita,mods):
     boxes-=1
     if ((100-(agita*(cat_level/2))+mods[3[0]])*mods[3[1]])>=random.randint(1,100):
         agita+=20
         print("cat went in box and seems less agitated")
+        return agita
     else:
         print("The cat wasn't lured by the box")
-def bandage():
+def bandage(bandages,hp,mods):
     bandages-=1
     hp+=(random.randint(3,7)+mods[4[0]]*mods[4[1]])
-def check():
+    return bandages and hp
+def check(cat,friendliness,agita):
     print(f"cat has an Agita of {agita}\n cat needs {friendliness} more freindliness points to be pet")
-def inventory():
-    print(f"Melee flat{mods[0[0]]},\nMelee mult{mods[0[1]]},\nthrowing flat{mods[1[0]]},\nthrowing mult{mods[1[1]]},\nfood flat{mods[2[0]]},\nfood mult{mods[2[1]]},\nbox flat{mods[3[0]]},\nbox mult{mods[3[1]]},\nhealing flat{mods[4[0]]},\nhealing mult{mods[4[1]]},\nLuck{mods[5[0]]}")
-def pet():
+def inventory(mods,boxes,bandages):
+    print(f"bandages:{bandages},\nBoxes:{boxes},\nMelee flat:{mods[0[0]]},\nMelee mult:{mods[0[1]]},\nthrowing flat:{mods[1[0]]},\nthrowing mult:{mods[1[1]]},\nfood flat:{mods[2[0]]},\nfood mult:{mods[2[1]]},\nbox flat:{mods[3[0]]},\nbox mult:{mods[3[1]]},\nhealing flat:{mods[4[0]]},\nhealing mult:{mods[4[1]]},\nLuck:{mods[5[0]]}")
+def pet(friendliness):
     if friendliness<=0:
         print('cat let you pet it and gave you some loot')
-        victory()
+        return False
     else:
         print("cat recoiled at your approach")
-def cadd():
+def cadd(mods,common_cards,uncommon_cards,rare_cards,epic_cards,legendary_cards):
     for x in range(0,3):
         card=[]
         rng=random.randint(1,50)+mods[5[0]]
@@ -322,23 +331,34 @@ def cadd():
             card_1=card[1+(choice*4-4)]
             card_2=card[2+(choice*4-4)]
             mods[card_1[card_2]]+=card[3+(choice*4-4)]
-            break
+            return mods
         else:
             print("Invalid input")
     
-def victory():
+def victory(rooms,boxes,bandages,cat_level,floors,mods,common_cards,uncommon_cards,rare_cards,epic_cards,legendary_cards):
     rooms+=1
     box_gain=random.randint(0,mods[5[0]])
     bandage_gain=random.randint(1+mods[5[0]],2*mods[5[0]]+2)
     print(f"you gained {box_gain} boxes and {bandage_gain} bandages")
+    bandages+=bandage_gain
+    boxes=box_gain
     score+=(10**cat_level)*floors
-    cadd()
-    if rooms!=5:
-        dismap()
-    else:
-        print
-def defeat():
-    print("GAME OVER")
+    cadd(mods,common_cards,uncommon_cards,rare_cards,epic_cards,legendary_cards)
+    if rooms==6:
+        floors+=1
+        rooms=1
+    return mods and boxes and bandages and score and floors
+
+def defeat(score):
+    print(f"GAME OVER\n FINAL SCORE:{score}")
+    while True:
+        cont=input(f"would you like to play again?\n Yes(1)\n No(2)")
+        if cont=="1":
+            return True
+        elif cont=="2":
+            return False
+        else:
+            print("Invalid input")
 
 while True:
     print("Welcome to cat cat tower ")

@@ -15,3 +15,17 @@ print_list_contents(*my_list)
 #git config --global user.email "github email"
 print('██')
 print(f"\033[96m{my_list[1]}\033[0m")
+
+
+x=1
+y=3
+print(x)
+print(y)
+def add(x,y):
+    x+=1
+    y+=1
+    return x and y
+x=add(x,y)
+y=add(x,y)
+print(x)
+print(y)
