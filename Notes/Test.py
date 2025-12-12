@@ -24,8 +24,8 @@ print(y)
 def add(x,y):
     x+=1
     y+=1
-    return x and y
-x=add(x,y)
-y=add(x,y)
+    return x , y
+x=(add(x,y)[0])
+y=add(x,y)[1]
 print(x)
 print(y)

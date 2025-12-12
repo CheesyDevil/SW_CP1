@@ -223,7 +223,7 @@ def begin(cat_level,basic_cats,elite_cats,boss_cats,friendliness, agita):
     print(f"a {cat[0]} is approaching you")
     friendliness=cat[4]
     agita=cat[5]
-    return friendliness and agita
+    return friendliness , agita
 
 def player(hp,actions,mods,cat,cat_level,friendliness,agita,bandages,boxes):
     while True:
@@ -231,20 +231,24 @@ def player(hp,actions,mods,cat,cat_level,friendliness,agita,bandages,boxes):
         print(f"to do an action type it's coresponding number\n1:{actions[0]}\n2:{actions[1]}\n3:{actions[2]}\n4:{actions[3]}\n5:{actions[4]}\n6:{actions[5]}\n7:{actions[6]}\n8:{actions[7]}")
         choice=input("what would you like to do?")
         if choice=="1":
-            melee(friendliness,mods)
+            friendliness=melee(friendliness,mods)
             return friendliness
         elif choice=="2":
-            throw(friendliness,mods,cat_level)
-            return friendliness and agita
+            friendliness=throw(friendliness,mods,cat_level, agita)[0]
+            agita=throw(friendliness,mods, cat_level,agita)[1]
+            return friendliness , agita
         elif choice=="3":
-            food(friendliness,mods)
-            return friendliness and agita
+            friendliness=food(friendliness,mods, agita)[0]
+            agita=food(friendliness,mods, agita)[1]
+            return friendliness , agita
         elif choice=="4":
-            box(boxes,agita,mods)
-            return boxes and agita
+            boxes=box(boxes,agita,mods)[0]
+            agita=box(boxes,agita,mods)[1]
+            return boxes , agita
         elif choice=="5":
-            bandage(bandages,hp,mods)
-            return bandages and hp
+            bandages=bandage(bandages,hp,mods)[0]
+            hp=bandage(bandages,hp,mods)[1]
+            return bandages , hp
         elif choice=="6":
             check(cat,friendliness,agita)
             break
@@ -271,16 +275,16 @@ def melee(friendliness,mods):
     friendliness-=(random.randint(3,9)+mods[0[0]])*mods[0[1]]
     print("cat is playing with toy and seems more friendly")
     return friendliness
-def throw(friendliness,mods,cat_level):
+def throw(friendliness,mods,cat_level,agita):
     friendliness-=(random.randint(7,9)+mods[1[0]])*mods[1[1]]
     agita+=10*cat_level
     print("cat went chased toy and seems more agitated and friendly")
-    return friendliness and agita
-def food(friendliness,mods):
+    return friendliness , agita
+def food(friendliness,mods,agita):
     friendliness-=(random.randint(3,5)+mods[2[0]])*mods[2[1]]
     agita-=5*mods[2[1]]
     print("cat ate the food and seems less agitated and more friendly")
-    return friendliness and agita
+    return friendliness , agita
 def box(boxes,agita,mods):
     boxes-=1
     if ((100-(agita*(cat_level/2))+mods[3[0]])*mods[3[1]])>=random.randint(1,100):
