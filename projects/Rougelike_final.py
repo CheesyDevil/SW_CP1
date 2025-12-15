@@ -167,7 +167,7 @@ legendary_cards={
 }
 
 #Lists
-actions=["Melee Toy", "Throwing Toy", "Cat Food", 'Box', "Bandage", "Check", "Inentory", "Pet"]
+actions=["Melee Toy", "Throwing Toy", "Cat Food", 'Box', "Bandage", "Check", "Inventory", "Pet"]
 mods=[[0,1],[0,1],[0,1],[0,1],[0,1],[0]]
 cat=[]
 
@@ -182,8 +182,9 @@ score=0
 room=1
 floor=1
 
-#boolean
+#booleans
 unpetted=True
+checked=False
 
 #functions
 def slow_print(text, delay=0.05):
@@ -261,8 +262,10 @@ def bandage(bandages,hp,mods):
     hp=hp+hp_gain
     slow_print(f"the bandage healed you {hp_gain}")
     return int(bandages) , int(hp)
-def check(friendliness,agita,cat):
+def check(friendliness,agita,cat,checked):
     slow_print(f"cat has an Agita of {int(agita)}\ncat needs {int(friendliness)} more freindliness points to be pet\nMults:\nMelee:{cat[1]}X  Throwing:{cat[2]}X   Food:{cat[3]}X  Box:{cat[4]}X")
+    checked=True
+    return checked
 def inventory(mods,boxes,bandages):
     slow_print(f"Bandages:{int(bandages)},\nBoxes:{int(boxes)},\nMelee flat:{int(mods[0][0])},\nMelee mult:{mods[0][1]},\nThrowing flat:{int(mods[1][0])},\nThrowing mult:{mods[1][1]},\nFood flat:{int(mods[2][0])},\nFood mult:{mods[2][1]},\nBox flat:{int(mods[3][0])},\nBox mult:{mods[3][1]},\nHealing flat:{int(mods[4][0])},\nHealing mult:{mods[4][1]},\nLuck:{int(mods[5][0])}")
 def pet(friendliness):
@@ -273,11 +276,11 @@ def pet(friendliness):
         slow_print("cat recoiled at your approach")
         return True
 
-def player(hp,actions,mods,cat_level,friendliness,agita,bandages,boxes,unpetted,cat):
+def player(hp,actions,mods,cat_level,friendliness,agita,bandages,boxes,unpetted,cat,checked):
     slow_print(f"You have {int(hp)} Health left",delay=0.02)
     slow_print(f'you need {int(friendliness)} more friendliness points to pet the cat',delay=0.02)
     while True:
-        slow_print(f"to do an action type it's coresponding number\n1:{actions[0]}\n2:{actions[1]}\n3:{actions[2]}\n4:{actions[3]}\n5:{actions[4]}\n6:{actions[5]}\n7:{actions[6]}\n8:{actions[7]}", delay=0.02)
+        slow_print(f"to do an action type it's coresponding number\n1:{actions[0]}\n2:{actions[1]}\n3:{actions[2]}\n4:{actions[3]}\n5:{actions[4]}\n6:{actions[5]}\n7:{actions[6]}\n8:{actions[7]}\ninput ? for more info", delay=0.02 )
         choice=input("what would you like to do?")
         if choice=="1":
             friendliness=melee(friendliness,mods,cat)
@@ -303,17 +306,22 @@ def player(hp,actions,mods,cat_level,friendliness,agita,bandages,boxes,unpetted,
                 slow_print("You seem to have run out of bandages.")
                 continue
         elif choice=="6":
-            check(friendliness,agita,cat)
-            break
+            if checked==False:
+                check(friendliness,agita,cat)
+                break
+            else:
+                continue
         elif choice=="7":
             inventory(mods,boxes,bandages)
             continue
         elif choice=="8":
             unpetted=pet(friendliness)
             break
+        elif choice=='?':
+            slow_print(f"agita refers to the percent chance for the cat to attack you\nto defeat the cat you mut select the pet option when friendliness left is less than or equal to 0\nmelee only increases frendliness\nthrowing toy increases freindliness more but increases agita\nfood decreases agita but increases friendliness less\nbox only has a chance of workinbg and just lower agita by 20\nbandages are used to increase your health but you only have a limited amount of them\ncheck gives you information on the cat's weaknesses\ninventory lets you check your stats and doesn't take your turn\npet is you win condition and only works if cat has 0 or less friendship befor being able to be pet")
         else:
             slow_print("please enter a valid input")
-    return int(agita),int(friendliness),int(hp),int(bandages),int(boxes),unpetted
+    return int(agita),int(friendliness),int(hp),int(bandages),int(boxes),unpetted,checked
 def cat_turn(agita,cat,cat_level,hp):
     if agita>=random.randint(1,100):
         cattack=int(random.randint(1*cat_level+3*(floor-1),3*cat_level+4*(floor-1))+cat[5])
@@ -388,7 +396,7 @@ while True:#game loop
         friendliness=int((cat[6]*floor)+room)
         agita=int(cat[7]+(room*floor))
         while True:#combat loop
-            agita,friendliness,hp,bandages,boxes,unpetted=player(hp,actions,mods,cat_level,friendliness,agita,bandages,boxes,unpetted,cat)
+            agita,friendliness,hp,bandages,boxes,unpetted=player(hp,actions,mods,cat_level,friendliness,agita,bandages,boxes,unpetted,cat,checked)
             if unpetted:
                 hp=cat_turn(agita,cat,cat_level,hp)
                 if hp<=0:
@@ -401,11 +409,12 @@ while True:#game loop
             mods , boxes , bandages , score ,room, floor=victory(room,boxes,bandages,cat_level,floor,mods,common_cards,uncommon_cards,rare_cards,epic_cards,legendary_cards,score)
             cat_level=dismap(room,cat_level,floor)
             unpetted=True
+            checked=False
             continue
         elif hp==0:
             break
         else:
-            slow_print("ERROR CODE: 407")
+            slow_print("ERROR CODE: 417")
     if defeat(score,floor,room):
         continue
     else:
