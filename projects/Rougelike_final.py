@@ -396,7 +396,7 @@ while True:#game loop
         friendliness=int((cat[6]*floor)+room)
         agita=int(cat[7]+(room*floor))
         while True:#combat loop
-            agita,friendliness,hp,bandages,boxes,unpetted=player(hp,actions,mods,cat_level,friendliness,agita,bandages,boxes,unpetted,cat,checked)
+            agita,friendliness,hp,bandages,boxes,unpetted,checked=player(hp,actions,mods,cat_level,friendliness,agita,bandages,boxes,unpetted,cat,checked)
             if unpetted:
                 hp=cat_turn(agita,cat,cat_level,hp)
                 if hp<=0:
