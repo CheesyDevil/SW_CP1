@@ -54,3 +54,5 @@ def slow_print(text, delay=0.05):
 # --- Usage Examples ---
 slow_print("Welcome to the program! This text is typing out slowly.")
 slow_print("Here is another line with a custom, faster delay.", delay=0.02)
+
+import pygame
